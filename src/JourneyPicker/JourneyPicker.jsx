@@ -1,6 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import DatesOptions from './DatesOptions';
 import mapImage from './img/map.svg';
 import './style.css';
+
+
+const CityOptions = ({cities}) => {
+
+  return (
+       <>
+        <option value="">Vyberte</option>
+          {cities.map((city) => <option key={city.code} value={city.code}>{city.name}</option>)}   
+        </>       
+ 
+   )
+}
+
 
 const JourneyPicker = () => {
 
@@ -8,7 +22,21 @@ const JourneyPicker = () => {
     const [fromCity, setFromCity] = useState('')
     const [toCity, setToCity] = useState('')
     const [date, setDate] = useState('')
+    const [cities, setCities] = useState([])
+    const [dates, setDates] = useState([])
 
+    useEffect(() => {
+      fetch('https://leviexpress-backend.herokuapp.com/api/cities')
+      .then((resp) => resp.json())
+      .then((json) => setCities(json.data))
+    }, [])
+  
+    useEffect(() => {
+      fetch('https://leviexpress-backend.herokuapp.com/api/dates')
+      .then((resp) => resp.json())
+      .then((json) => setDates(json.data))
+    }, [])
+  
 
     const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,31 +63,19 @@ const JourneyPicker = () => {
          <label>
            <div className="journey-picker__label">Odkud:</div>
            <select value={fromCity} onChange={onSelectFromCity}>
-             <option value="">Vyberte</option>
-             <option value="Mesto1">Město 1</option>
-             <option value="Mesto2">Město 2</option>
-             <option value="Mesto3">Město 3</option>
-             <option value="Mesto4">Město 4</option>
+           <CityOptions cities={cities}/>
            </select>
          </label>
          <label>
            <div className="journey-picker__label">Kam:</div>
            <select value={toCity} onChange={onSelectToCity}>
-             <option value="">Vyberte</option>
-             <option value="Mesto1">Město 1</option>
-             <option value="Mesto2">Město 2</option>
-             <option value="Mesto3">Město 3</option>
-             <option value="Mesto4">Město 4</option>
+           <CityOptions cities={cities}/>
            </select>
          </label>
          <label>
            <div className="journey-picker__label">Datum:</div>
            <select value={date} onChange={onSelectDate}>
-             <option value="">Vyberte</option>
-             <option>20.05.2021</option>
-             <option>21.05.2021</option>
-             <option>22.05.2021</option>
-             <option>23.05.2021</option>
+            <DatesOptions dates={dates} /> 
            </select>
          </label>
          <div className="journey-picker__controls">
