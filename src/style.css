@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #444;
 }
 
@@ -20,6 +20,20 @@ body {
   max-width: 720px;
   margin-right: auto;
   margin-left: auto;
+}
+
+header,
+footer {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media only screen and (min-width: 768px) {
+  header,
+  footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 h2 {
@@ -63,6 +77,4 @@ label {
   background-color: lightgray;
   cursor: initial;
 }
-
-
 

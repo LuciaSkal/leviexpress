@@ -10,8 +10,8 @@ import {
 } from 'react-router-dom';
 
 import './style.css';
-import Home from './pages/Home'
-import Reservation from './pages/Reservation'
+import Home from './Home/Home'
+import Reservation from './Reservation/Reservation'
 
 const App = () => {
 
