@@ -7,6 +7,7 @@ import './style.css';
 
 
 const JourneyDetail = ({journey}) => {
+  console.log(journey)
   console.log(journey.stops)
 
 
