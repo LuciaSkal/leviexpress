@@ -3,14 +3,8 @@ import BusStop from '../BusStop/BusStop';
 import './style.css';
 
 
-
-
-
 const JourneyDetail = ({journey}) => {
-  console.log(journey)
-  console.log(journey.stops)
-
-
+ 
   return (
     <div className="journey-detail container">
     <h2>Podrobnosti cesty</h2>

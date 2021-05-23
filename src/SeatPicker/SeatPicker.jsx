@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useHistory } from "react-router-dom";
 import Seat from '../Seat/Seat';
 import './style.css';
 
@@ -7,19 +8,33 @@ import './style.css';
 const SeatPicker = ({seats,journeyId}) => {
   const [selectedSeatNumber, setSelectedSeatNumber] = useState(null)
   
-  console.log(journeyId)
-
-  const handleSelectSeat = (number) => {
+ const handleSelectSeat = (number) => {
     setSelectedSeatNumber(number)
-   
+  }
+  
+
+  let history = useHistory();
+  const handleBuy = () => {
+    fetch(`https://leviexpress-backend.herokuapp.com/api/reserve?seat=${selectedSeatNumber}&journeyId=${journeyId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        seat: `${selectedSeatNumber}`,
+        journeyId: `${journeyId}`,
+    })
+   }).then((response) => response.json())
+     .then((json) =>
+     history.push(`/reservation/${json.data.reservationId}`));
   }
 
   return (
   <div className="seat-picker container">
     <h2>Vyberte sedadlo</h2>
-     <div className="seats">
+      <div className="seats">
        
-     <div className="seat-row">
+       <div className="seat-row">
        {seats[0].map((row) => <Seat  number={row.number}
             isOccupied={row.isOccupied}
             key={row.number}
@@ -58,10 +73,10 @@ const SeatPicker = ({seats,journeyId}) => {
             isSelected={selectedSeatNumber === row.number}
             onSelect={handleSelectSeat} />)}
        </div>
-    
-    
-     </div>
-    <button className="btn" type="button">Rezervovat</button>
+      </div>
+    <button className="btn" type="button" disabled={!selectedSeatNumber}
+      onClick={handleBuy}
+    >Rezervovat</button>
   </div>
   )
 }
