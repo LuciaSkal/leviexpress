@@ -19,7 +19,6 @@ const CityOptions = ({cities}) => {
 const JourneyPicker = ({onJourneyChange}) => {
 
 
-  
     const [fromCity, setFromCity] = useState('')
     const [toCity, setToCity] = useState('')
     const [date, setDate] = useState('')

@@ -7,9 +7,8 @@ const DatesOptions = ({dates}) => {
   return (
        <>
         <option value="">Vyberte</option>
-        {dates.map((date) => <option key={date}>{date}</option>)} 
-        
-      </>       
+        {dates.map((date) => <option key={date.dateBasic}>{date.dateBasic}</option>)} 
+       </>
  
    )
 }
